@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 module.exports = {
     roots: ['<rootDir>/src'],
     collectCoverageFrom: [
