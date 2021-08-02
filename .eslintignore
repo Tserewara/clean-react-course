@@ -3,3 +3,4 @@ node_modules
 .husky
 coverage
 public
+*.scss
