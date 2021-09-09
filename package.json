@@ -1,7 +1,7 @@
 {
   "name": "clean-react",
   "version": "1.0.1",
-  "description": "Clean React With Mango",
+  "description": "Clean React - Curso Rodrigo Manguinho",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open",
