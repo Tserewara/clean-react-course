@@ -12,7 +12,8 @@
     "react"
   ],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "warnOnUnsupportedTypeScriptVersion": false
   },
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
