@@ -1,4 +1,5 @@
 [![Build Status](https://app.travis-ci.com/Tserewara/clean-react-course.svg?branch=master)](https://app.travis-ci.com/Tserewara/clean-react-course)
+[![Coverage Status](https://coveralls.io/repos/github/Tserewara/clean-react-course/badge.svg?branch=master)](https://coveralls.io/github/Tserewara/clean-react-course?branch=master)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
 
