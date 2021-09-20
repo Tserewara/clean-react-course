@@ -98,8 +98,7 @@ describe('Login Component', () => {
   test('Should enable submit button if form is valid', () => {
     const { sut } = makeSut()
     Helper.populateField(sut, 'email')
-    const passwordInput = sut.getByTestId('password')
-    fireEvent.input(passwordInput, { target: { value: faker.internet.password() } })
+    Helper.populateField(sut, 'password')
     Helper.testButtonIsDisabled(sut, 'submit', false)
   })
 
