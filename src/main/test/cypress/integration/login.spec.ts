@@ -64,7 +64,6 @@ describe('Login', () => {
     cy.getByTestId('password').focus().type('12345')
     cy.getByTestId('submit').click()
     cy.getByTestId('error-wrap')
-
       .getByTestId('spinner').should('exist')
       .getByTestId('main-error').should('not.exist')
       .getByTestId('spinner').should('not.exist')
