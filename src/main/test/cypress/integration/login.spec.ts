@@ -40,10 +40,11 @@ describe('Login', () => {
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
 
-  it('Should not call submit if form is invalid', () => {
-    Http.mockOk()
-    cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}')
-    FormHelper.testHttpCallsCount(0)
+  it('Should present InvalidCredentialsError on 401', () => {
+    Http.mockInvalidCredentialsError()
+    simulateValidSubmit()
+    FormHelper.testMainError('Credenciais inválidas')
+    FormHelper.testUrl('/login')
   })
 
   it('Should present UnexpectedError on default error cases', () => {
@@ -76,10 +77,9 @@ describe('Login', () => {
     FormHelper.testHttpCallsCount(1)
   })
 
-  it('Should present InvalidCredentialsError on 401', () => {
-    Http.mockInvalidCredentialsError()
-    simulateValidSubmit()
-    FormHelper.testMainError('Credenciais inválidas')
-    FormHelper.testUrl('/login')
+  it('Should not call submit if form is invalid', () => {
+    Http.mockOk()
+    cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}')
+    FormHelper.testHttpCallsCount(0)
   })
 })
