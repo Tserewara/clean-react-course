@@ -31,6 +31,13 @@ describe('Login', () => {
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
 
+  it('Should present UnexpectedError on default error cases', () => {
+    Http.mockUnexpectedError()
+    simulateValidSubmit()
+    FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve.')
+    FormHelper.testUrl('/login')
+  })
+
   it('Should present valid state if form is valid', () => {
     cy.getByTestId('email').focus().type(faker.internet.email())
     FormHelper.testInputStatus('email')
@@ -44,13 +51,6 @@ describe('Login', () => {
     Http.mockInvalidCredentialsError()
     simulateValidSubmit()
     FormHelper.testMainError('Credenciais inválidas')
-    FormHelper.testUrl('/login')
-  })
-
-  it('Should present UnexpectedError on default error cases', () => {
-    Http.mockUnexpectedError()
-    simulateValidSubmit()
-    FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve.')
     FormHelper.testUrl('/login')
   })
 
