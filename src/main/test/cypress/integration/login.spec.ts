@@ -69,7 +69,7 @@ describe('Login', () => {
     cy.getByTestId('error-wrap').should('not.have.descendants')
     simulateValidSubmit()
     FormHelper.testUrl('/')
-    FormHelper.testLocalStorageItem('accessToken')
+    FormHelper.testLocalStorageItem('account')
   })
 
   it('Should prevent multiple submits', () => {
