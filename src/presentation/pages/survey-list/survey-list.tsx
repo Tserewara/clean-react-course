@@ -1,11 +1,11 @@
 import Styles from './survey-list-styles.scss'
 import { Footer, Header } from '@/presentation/components'
 import { Error, SurveyContext, SurveyListItem } from '@/presentation/pages/survey-list/components'
+import { ApiContext } from '@/presentation/contexts'
 import { LoadSurveyList } from '@/domain/usecases'
 import { AccessDeniedError } from '@/domain/errors'
 import { useHistory } from 'react-router-dom'
 import React, { useContext, useEffect, useState } from 'react'
-import { ApiContext } from '@/presentation/contexts'
 
 type Props = {
   loadSurveyList: LoadSurveyList
