@@ -23,18 +23,16 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
     passwordError: '',
     mainError: ''
   })
-  useEffect(() => {
+
+  useEffect(() => validate('email'), [state.email])
+  useEffect(() => validate('password'), [state.password])
+
+  const validate = (field: string): void => {
     const { email, password } = state
     const formData = { email, password }
-    const emailError = validation.validate('email', formData)
-    const passwordError = validation.validate('password', formData)
-    setState({
-      ...state,
-      emailError,
-      passwordError,
-      isFormInvalid: !!emailError || !!passwordError
-    })
-  }, [state.email, state.password])
+    setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, formData) }))
+    setState(old => ({ ...old, isFormInvalid: !!old.emailError || !!old.passwordError }))
+  }
 
   const handleSubmmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
@@ -62,17 +60,17 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
   return (
     <div className={Styles.loginWrap}>
       <LoginHeader />
-      <FormContext.Provider value={ { state, setState } }>
-        <form data-testid="form" className={Styles.form} onSubmit={ handleSubmmit }>
+      <FormContext.Provider value={{ state, setState }}>
+        <form data-testid="form" className={Styles.form} onSubmit={handleSubmmit}>
           <h2>Login</h2>
-          <Input type="email" name="email" placeholder="Digite seu e-mail"/>
-          <Input type="password" name="password" placeholder="Digite sua senha"/>
+          <Input type="email" name="email" placeholder="Digite seu e-mail" />
+          <Input type="password" name="password" placeholder="Digite sua senha" />
           <SubmitButton text="Entrar" />
           <Link data-testid='signup-link' to='/signup' className={Styles.link}>Criar conta</Link>
           <FormStatus />
         </form>
       </FormContext.Provider>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
