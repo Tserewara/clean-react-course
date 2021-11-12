@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
 import Styles from './signup-styles.scss'
 import { LoginHeader, Footer, Input, FormStatus, SubmitButton } from '@/presentation/components'
 import { FormContext, ApiContext } from '@/presentation/contexts'
 import { Validation } from '@/presentation/protocols/validation'
+import { useHistory, Link } from 'react-router-dom'
 import { AddAccount } from '@/domain/usecases'
+import React, { useContext, useEffect, useState } from 'react'
 
 type Props = {
   validation: Validation
@@ -28,23 +28,17 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
     mainError: ''
   })
 
-  useEffect(() => {
+  useEffect(() => validate('name'), [state.name])
+  useEffect(() => validate('email'), [state.email])
+  useEffect(() => validate('password'), [state.password])
+  useEffect(() => validate('passwordConfirmation'), [state.passwordConfirmation])
+
+  const validate = (field: string): void => {
     const { name, email, password, passwordConfirmation } = state
     const formData = { name, email, password, passwordConfirmation }
-    const nameError = validation.validate('name', formData)
-    const emailError = validation.validate('email', formData)
-    const passwordError = validation.validate('password', formData)
-    const passwordConfirmationError = validation.validate('passwordConfirmation', formData)
-
-    setState({
-      ...state,
-      nameError,
-      emailError,
-      passwordError,
-      passwordConfirmationError,
-      isFormInvalid: !!nameError || !!emailError || !!passwordError || !!passwordConfirmationError
-    })
-  }, [state.name, state.email, state.password, state.passwordConfirmation])
+    setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, formData) }))
+    setState(old => ({ ...old, isFormInvalid: !!old.nameError || !!old.emailError || !!old.passwordError || !!old.passwordConfirmationError }))
+  }
 
   const handleSubmmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
