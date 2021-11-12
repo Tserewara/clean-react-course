@@ -1,6 +1,6 @@
 {
   "name": "clean-react",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Clean React - Curso Rodrigo Manguinho",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,6 @@
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
-    "test:coveralls": "npm run test:ci && nyc report --reporter=lcov",
     "test:cypress": "cypress open",
     "check": "npm-check -u -s"
   },

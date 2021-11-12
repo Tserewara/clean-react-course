@@ -19,7 +19,7 @@ jobs:
     - name: Installing libs
       run: |
         npm install
-        npm test:coveralls
+        npm run test:ci
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
