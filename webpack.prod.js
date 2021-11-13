@@ -8,7 +8,7 @@ module.exports = merge(common, {
   mode: 'production',
   module: {
     rules: [{
-      test: /\.ts(x)?/,
+      test: /\.ts(x?)$/,
       loader: 'ts-loader',
       exclude: /node_modules/
     }, {
@@ -27,14 +27,16 @@ module.exports = merge(common, {
   },
   externals: {
     react: 'React',
-    'react-dom': 'ReactDOM'
+    axios: 'axios',
+    'react-dom': 'ReactDOM',
+    'react-router-dom': 'ReactRouterDOM'
   },
   plugins: [
     new DefinePlugin({
       'process.env.API_URL': JSON.stringify('https://fordevs.herokuapp.com/api')
     }),
     new HtmlWebpackPlugin({
-      template: './template.dev.html'
+      template: './template.prod.html'
     }),
     new MiniCssExtractPlugin({
       filename: 'main-bundle-[hash].css'
