@@ -1,4 +1,4 @@
-[![Test Coveralls](https://github.com/Tserewara/clean-react-course/actions/workflows/ci.yml/badge.svg)](https://github.com/Tserewara/clean-react-course/actions/workflows/ci.yml)
+[![build](https://github.com/Tserewara/clean-react-course/actions/workflows/ci.yml/badge.svg)](https://github.com/Tserewara/clean-react-course/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Tserewara/clean-react-course/badge.svg?branch=master)](https://coveralls.io/github/Tserewara/clean-react-course?branch=master)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
