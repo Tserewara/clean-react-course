@@ -16,16 +16,16 @@ jobs:
       with:
         node-version: 12.x
 
-    - name: Npm install
+    - name: Npm install and Tests
       run: |
         npm install
         npm run test:ci
+        npm run test:cypress:ci
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-    
     
     - name: Save
       run: |
