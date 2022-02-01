@@ -47,7 +47,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
       if (state.isLoading || state.isFormInvalid) {
         return
       }
-      setState({ ...state, isLoading: true })
+      setState(old => ({ ...old, isLoading: true }))
       const account = await addAccount.add({
         name: state.name,
         email: state.email,
@@ -57,30 +57,30 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
       setCurrentAccount(account)
       history.replace('/')
     } catch (error) {
-      setState({
-        ...state,
+      setState(old => ({
+        ...old,
         isLoading: false,
         mainError: error.message
-      })
+      }))
     }
   }
 
   return (
     <div className={Styles.signupWrap}>
       <LoginHeader />
-      <FormContext.Provider value={ { state, setState } }>
+      <FormContext.Provider value={{ state, setState }}>
         <form data-testid="form" className={Styles.form} onSubmit={handleSubmmit}>
           <h2>Criar Conta</h2>
-          <Input type="text" name="name" placeholder="Digite seu nome"/>
-          <Input type="email" name="email" placeholder="Digite seu e-mail"/>
-          <Input type="password" name="password" placeholder="Digite sua senha"/>
-          <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha"/>
+          <Input type="text" name="name" placeholder="Digite seu nome" />
+          <Input type="email" name="email" placeholder="Digite seu e-mail" />
+          <Input type="password" name="password" placeholder="Digite sua senha" />
+          <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
           <SubmitButton text="Cadastrar" />
           <Link data-testid="login-link" replace to="/login" className={Styles.link}>Voltar Para Login</Link>
           <FormStatus />
         </form>
       </FormContext.Provider>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
