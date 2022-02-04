@@ -5,11 +5,11 @@ import { LoadSurveyList } from '@/domain/usecases/load-survey-list'
 export class RemoteLoadSurveyList implements LoadSurveyList {
   constructor (
     private readonly url: string,
-    private readonly httpGetClient: HttpClient<RemoteLoadSurveyList.Model[]>
+    private readonly httpClient: HttpClient<RemoteLoadSurveyList.Model[]>
   ) {}
 
   async loadAll (): Promise<LoadSurveyList.Model[]> {
-    const httpResponse = await this.httpGetClient.request({
+    const httpResponse = await this.httpClient.request({
       url: this.url,
       method: 'get'
     })
