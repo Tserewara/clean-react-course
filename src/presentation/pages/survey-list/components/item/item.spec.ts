@@ -1,10 +1,10 @@
 import { mockSurveyModel } from '@/domain/test'
 import { IconName } from '@/presentation/components'
 import { SurveyItem } from '@/presentation/pages/survey-list/components'
-import { fireEvent, render, screen } from '@testing-library/react'
-import React from 'react'
+import { renderWithHistory } from '@/presentation/test'
+
+import { fireEvent, screen } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
 
 type SutTypes = {
   history: MemoryHistory
@@ -12,11 +12,7 @@ type SutTypes = {
 
 const makeSut = (survey = mockSurveyModel()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/'] })
-  render(
-    <Router history={history}>
-      <SurveyItem survey={survey} />
-    </Router>
-  )
+  renderWithHistory({ history, Page: () => SurveyItem({ survey }) })
   return {
     history
   }
