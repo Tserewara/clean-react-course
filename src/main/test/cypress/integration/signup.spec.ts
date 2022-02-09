@@ -3,10 +3,13 @@ import * as Helper from '../utils/helpers'
 import * as Http from '../utils/http-mocks'
 import faker from 'faker'
 
-const path = /signup/
+const path = /api\/signup/
 const mockEmailInUseError = (): void => Http.mockForbiddenError(path, 'POST')
 const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
-const mockSuccess = (): void => Http.mockOk(path, 'POST', 'fx:account')
+const mockSuccess = (): void => {
+  Http.mockOk(/api\/surveys/, 'GET', 'survey-list')
+  Http.mockOk(path, 'POST', 'account', 'signupRequest')
+}
 
 const populateFields = (): void => {
   cy.getByTestId('name').focus().type(faker.name.findName())
@@ -90,7 +93,6 @@ describe('SignUp', () => {
 
   it('Should save accessToken if valid credentials are provided', () => {
     mockSuccess()
-    cy.getByTestId('error-wrap').should('not.have.descendants')
     simulateValidSubmit()
     Helper.testUrl('/')
     Helper.testLocalStorageItem('account')
@@ -101,12 +103,12 @@ describe('SignUp', () => {
     populateFields()
     cy.getByTestId('submit').dblclick()
     cy.wait('@request')
-    Helper.testHttpCallsCount(1)
+    cy.get('@signupRequest.all').should('have.length', 1)
   })
 
   it('Should not call submit if form is invalid', () => {
     mockSuccess()
     cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}')
-    Helper.testHttpCallsCount(0)
+    cy.get('@signupRequest.all').should('have.length', 0)
   })
 })
